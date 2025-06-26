@@ -1,0 +1,343 @@
+
+//Find all the topics which are taught in the month of October
+db.topics.find({
+  date: {
+    $gte: ISODate("2020-10-01"),
+    $lte: ISODate("2020-10-31")
+  }
+});
+
+//ANS
+//Find all the topics and tasks which are taught in the month of October
+
+{
+  _id: ObjectId('685d21fcb9bb1a34ca560326'),
+  topic : 'JavaScript',
+  date : 2020-10-15T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d21fcb9bb1a34ca560327'),
+  topic : 'MySQL',
+  date : 2020-10-27T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d21fcb9bb1a34ca560328'),
+  topic: 'React',
+  date: 2020-10-22T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d21fcb9bb1a34ca560329'),
+  topic: 'NodeJs',
+  date: 2020-10-29T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d21fcb9bb1a34ca56032a'),
+  topic: 'MongoDB',
+  date: 2020-10-20T00:00:00.000Z
+}
+
+//Find all tasks which are taught in the month of October
+db.tasks.find({
+  date: {
+    $gte: ISODate("2020-10-01"),
+    $lte: ISODate("2020-10-31")
+  }
+});
+
+//ANS
+
+{
+  _id: ObjectId('685d238eb9bb1a34ca56032c'),
+  name: 'John',
+  topic: 'JavaScript',
+  submitted: true,
+  date: 2020-10-16T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d238eb9bb1a34ca56032d'),
+  name: 'Joy',
+  topic: 'MySQL',
+  submitted: true,
+  date: 2020-10-28T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d238eb9bb1a34ca56032e'),
+  name: 'Charlie',
+  topic: 'React',
+  submitted: false,
+  date: 2020-10-13T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d238eb9bb1a34ca56032f'),
+  name: 'Bob',
+  topic: 'NodeJs',
+  submitted: false,
+  date: 2020-10-30T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d238eb9bb1a34ca560330'),
+  name: 'Alice',
+  topic: 'MongoDB',
+  submitted: true,
+  date: 2020-10-21T00:00:00.000Z
+}
+{
+  _id: ObjectId('685d238eb9bb1a34ca560331'),
+  name: 'Peter',
+  topic: 'Postman',
+  submitted: true,
+  date: 2020-10-19T00:00:00.000Z
+}
+
+//Find all the company drives which appeared between 15-Oct-2020 and 31-Oct-2020
+db.company_drives.find({
+  date: {
+    $gte: ISODate("2020-10-15"),
+    $lte: ISODate("2020-10-31")
+  }
+});
+
+//ANS
+{
+  _id: ObjectId('685d2742b9bb1a34ca560332'),
+  company_name: 'Google',
+  date: 2020-10-20T00:00:00.000Z,
+  user_ids: [
+    ObjectId('685d1d30b9bb1a34ca56030d'),
+    ObjectId('685d1d30b9bb1a34ca56030c')
+  ]
+}
+{
+  _id: ObjectId('685d2742b9bb1a34ca560334'),
+  company_name: 'Microsoft',
+  date: 2020-10-20T00:00:00.000Z,
+  user_ids: [
+    ObjectId('685d1d30b9bb1a34ca56030e')
+  ]
+}
+{
+  _id: ObjectId('685d2742b9bb1a34ca560336'),
+  company_name: 'Delloite',
+  date: 2020-10-20T00:00:00.000Z,
+  user_ids: [
+    ObjectId('685d1d30b9bb1a34ca56030f'),
+    ObjectId('685d1d30b9bb1a34ca56030f')
+  ]
+}
+
+//Find all the company drives and students who appeared for the placement
+db.company_drives.aggregate([
+  {
+    $lookup: {
+      from: "users",
+      localField: "user_ids",
+      foreignField: "_id",
+      as: "students"
+    }
+  },
+  {
+    $project: {
+      company_name: 1,
+      date: 1,
+      "students.name": 1,
+      "students.email": 1
+    }
+  }
+]);
+{
+  _id: ObjectId('685d2742b9bb1a34ca560332'),
+  company_name: 'Google',
+  date: 2020-10-20T00:00:00.000Z,
+  students: [
+    {
+      name: 'Charlie',
+      email: 'charlie@example.com'
+    },
+    {
+      name: 'Joy',
+      email: 'joy@example.com'
+    }
+  ]
+}
+{
+  _id: ObjectId('685d2742b9bb1a34ca560333'),
+  company_name: 'Amazon',
+  date: 2020-11-01T00:00:00.000Z,
+  students: [
+    {
+      name: 'John',
+      email: 'john@example.com'
+    }
+  ]
+}
+{
+  _id: ObjectId('685d2742b9bb1a34ca560334'),
+  company_name: 'Microsoft',
+  date: 2020-10-20T00:00:00.000Z,
+  students: [
+    {
+      name: 'Bob',
+      email: 'bob@example.com'
+    }
+  ]
+}
+{
+  _id: ObjectId('685d2742b9bb1a34ca560335'),
+  company_name: 'EY',
+  date: 2020-11-01T00:00:00.000Z,
+  students: [
+    {
+      name: 'Alice',
+      email: 'alice@example.com'
+    }
+  ]
+}
+{
+  _id: ObjectId('685d2742b9bb1a34ca560336'),
+  company_name: 'Delloite',
+  date: 2020-10-20T00:00:00.000Z,
+  students: [
+    {
+      name: 'Alice',
+      email: 'alice@example.com'
+    }
+  ]
+}
+{
+  _id: ObjectId('685d2742b9bb1a34ca560337'),
+  company_name: 'CTS',
+  date: 2020-11-01T00:00:00.000Z,
+  students: [
+    {
+      name: 'Bob',
+      email: 'bob@example.com'
+    }
+  ]
+}
+//Find the number of problems solved by the user in codekata
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "codekata",
+      localField: "_id",
+      foreignField: "user_id",
+      as: "codekata_info"
+    }
+  },
+
+  {
+    $project: {
+      name: 1,
+      problems_solved: "$codekata_info.problems_solved"
+    }
+  }
+])
+
+//ANS 
+
+
+{
+  _id: ObjectId('685d1d30b9bb1a34ca56030b'),
+  name: 'John',
+  problems_solved: [
+    110
+  ]
+}
+{
+  _id: ObjectId('685d1d30b9bb1a34ca56030c'),
+  name: 'Joy',
+  problems_solved: [
+    70
+  ]
+}
+{
+  _id: ObjectId('685d1d30b9bb1a34ca56030d'),
+  name: 'Charlie',
+  problems_solved: [
+    80
+  ]
+}
+{
+  _id: ObjectId('685d1d30b9bb1a34ca56030e'),
+  name: 'Bob',
+  problems_solved: [
+    100
+  ]
+}
+{
+  _id: ObjectId('685d1d30b9bb1a34ca56030f'),
+  name: 'Alice',
+  problems_solved: [
+    85
+  ]
+}
+{
+  _id: ObjectId('685d1d30b9bb1a34ca560310'),
+  name: 'Peter',
+  problems_solved: [
+    50
+  ]
+}
+
+
+
+// Find all the mentors who have mentee count more than 15
+db.mentors.find({
+  $expr: {
+    $gt: [{ $size: "$mentees" }, 15]
+  }
+})
+
+//ANS : 
+NONE
+
+
+//Find the number of users who were absent and task not submitted between 15-Oct-2020 and 31-Oct-2020
+db.attendance.aggregate([
+  {
+    $match: {
+      date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") },
+      present: false
+    }
+  },
+  {
+    $lookup: {
+      from: "tasks",
+      let: { userId: "$user_id", attDate: "$date" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $and: [
+                { $eq: ["$user_id", "$$userId"] },
+                { $eq: ["$submitted", false] },
+                { $gte: ["$date", ISODate("2020-10-15")] },
+                { $lte: ["$date", ISODate("2020-10-31")] }
+              ]
+            }
+          }
+        }
+      ],
+      as: "unsubmitted_tasks"
+    }
+  },
+  {
+    $match: {
+      "unsubmitted_tasks.0": { $exists: true }
+    }
+  },
+  {
+    $group: {
+      _id: "$user_id"
+    }
+  },
+  {
+    $count: "absent_and_not_submitted_count"
+  }
+]);
+
+//ANS
+{
+  absent_and_not_submitted_count: 1
+}
+

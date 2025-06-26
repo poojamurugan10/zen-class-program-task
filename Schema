@@ -1,0 +1,74 @@
+use Zen Class Programme
+
+## USERS
+
+db.users.insertMany([
+  { "name": "John", "email": "john@example.com"},
+  { "name": "Joy", "email": "joy@example.com" },
+  { "name": "Charlie", "email": "charlie@example.com" },
+  { "name": "Bob", "email": "bob@example.com"},
+  { "name": "Alice", "email": "alice@example.com" },
+  { "name": "Peter", "email": "peter@example.com" }
+]);
+
+## CODEKATA
+
+db.codekata.insertMany([
+  { "user_id": ObjectId('685d1d30b9bb1a34ca56030b'), "problems_solved": 110 },
+  { "user_id": ObjectId('685d1d30b9bb1a34ca56030c'), "problems_solved": 70 },
+  { "user_id": ObjectId('685d1d30b9bb1a34ca56030d'), "problems_solved": 80 },
+  { "user_id": ObjectId('685d1d30b9bb1a34ca56030e'), "problems_solved": 100 },
+  { "user_id": ObjectId('685d1d30b9bb1a34ca56030f'), "problems_solved": 85 },
+  { "user_id": ObjectId('685d1d30b9bb1a34ca560310'), "problems_solved": 50 }
+]);
+
+## ATTENDANCE
+
+db.attendance.insertMany([
+  { "name": "John", "date": ISODate("2020-10-18"), "present": true },
+  { "name": "Joy", "date": ISODate("2020-10-19"), "present": false  },
+  { "name": "Charlie", "date": ISODate("2020-10-24"), "present": true },
+  { "name": "Bob", "date": ISODate("2020-10-22"), "present": true  },
+  { "name": "Alice", "date": ISODate("2020-10-29"), "present": true },
+  {  "name": "Peter", "date": ISODate("2020-10-16"), "present": false  }
+]);
+
+## TOPICS
+
+db.topics.insertMany([
+  { "topic": "JavaScript", "date": ISODate("2020-10-15") },
+  { "topic": "MySQL", "date": ISODate("2020-10-27") },
+  { "topic": "React", "date": ISODate("2020-10-22") },
+  { "topic": "NodeJs", "date": ISODate("2020-10-29") },
+  { "topic": "MongoDB", "date": ISODate("2020-10-20") },
+  { "topic": "Postman", "date": ISODate("2020-09-18") }
+]);
+
+## TASKS
+
+db.tasks.insertMany([
+  { "name": "John", "topic": "JavaScript", "submitted": true, "date": ISODate("2020-10-16") },
+  { "name": "Joy",  "topic": "MySQL", "submitted": true, "date": ISODate("2020-10-28") },
+  { "name": "Charlie", "topic": "React", "submitted": false, "date": ISODate("2020-10-13") },
+  { "name": "Bob", "topic": "NodeJs", "submitted": false, "date": ISODate("2020-10-30") },
+  { "name": "Alice",  "topic": "MongoDB", "submitted": true, "date": ISODate("2020-10-21") },
+  { "name": "Peter", "topic": "Postman", "submitted": true, "date": ISODate("2020-10-19") }
+]);
+
+## COMPANY DRIVE
+
+db.company_drives.insertMany([
+  { "company_name": "Google", "date": ISODate("2020-10-20"), "user_ids": [ObjectId("685d1d30b9bb1a34ca56030d"), ObjectId("685d1d30b9bb1a34ca56030c")]},
+  { "company_name": "Amazon", "date": ISODate("2020-11-01"),  "user_ids": [ObjectId("685d1d30b9bb1a34ca56030b")] },
+  { "company_name": "Microsoft", "date": ISODate("2020-10-20"),  "user_ids": [ObjectId("685d1d30b9bb1a34ca56030e")] },
+  { "company_name": "EY", "date": ISODate("2020-11-01"),  "user_ids": [ObjectId("685d1d30b9bb1a34ca56030f"), ObjectId("685d1d30b9bb1a34ca56030f")]  },
+  { "company_name": "Delloite", "date": ISODate("2020-10-20"), "user_ids": [ObjectId("685d1d30b9bb1a34ca56030f"), ObjectId("685d1d30b9bb1a34ca56030f")] },
+  { "company_name": "CTS", "date": ISODate("2020-11-01"),  "user_ids": [ObjectId("685d1d30b9bb1a34ca56030e")]}
+]);
+
+## MENTORS
+
+db.mentors.insertMany([
+  {  "name": "Mentor A", "mentees": [ObjectId("685d1d30b9bb1a34ca56030b"), ObjectId("685d1d30b9bb1a34ca56030c"), ObjectId("685d1d30b9bb1a34ca56030d")] },
+  {  "name": "Mentor B", "mentees": [ObjectId("685d1d30b9bb1a34ca56030e"), ObjectId("685d1d30b9bb1a34ca56030f"), ObjectId("685d1d30b9bb1a34ca560310")] }
+])
