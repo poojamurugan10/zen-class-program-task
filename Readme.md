@@ -13,3 +13,9 @@ This project sets up a MongoDB database for the **Zen Class Programme** using `m
 - `codekata` – Tracks number of coding problems solved by each user
 - `company_drives` – Company placement details with student participants
 
+## Tech Stack
+
+- MongoDB
+- Mongo Shell (mongosh)
+- MongoDB Compass (GUI)
+- JavaScript (BSON queries)
